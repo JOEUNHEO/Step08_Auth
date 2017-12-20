@@ -51,7 +51,7 @@ public class UsersDao {
 
 		return isSuccess;
 	}
-	//아이디 비밀번호가 유효한지 여부를 리턴하는 메소드
+	//아이디와 비밀번호가 유효한지 여부를 리턴하는 메소드
 	public boolean isValid(UsersDto dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -89,10 +89,10 @@ public class UsersDao {
 			} catch (Exception e) {
 			}
 		}
-		//아이디 비밀번호가 유효한 정보인지 여부를 리턴해준다.
+		//아이디와 비밀번호가 유효한 정보인지 여부를 리턴해준다.
 		return isValid;
 	}
-	
+	//아이디 중복 확인을 확인하는 메소드
 	public boolean checkId(String id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -129,7 +129,7 @@ public class UsersDao {
 		
 		return isValid;
 	}
-	
+	//회원 정보를 뽑아 내는 메소드
 	public UsersDto getData(String id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -172,7 +172,7 @@ public class UsersDao {
 		
 		return dto;
 	}
-	
+	//회원 정보를 수정하는 메소드
 	public boolean update(UsersDto dto) {
 		boolean isSuccess = false;
 		Connection conn = null;
@@ -185,6 +185,36 @@ public class UsersDao {
 			pstmt.setString(1, dto.getPwd());
 			pstmt.setString(2, dto.getEmail());
 			pstmt.setString(3, dto.getId());
+			int flag = pstmt.executeUpdate();
+			if (flag > 0) {
+				isSuccess = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+
+		return isSuccess;
+	}
+	//회원 정보를 삭제하는 메소드
+	public boolean delete(String id) {
+		boolean isSuccess = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "DELETE FROM users WHERE id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
 			int flag = pstmt.executeUpdate();
 			if (flag > 0) {
 				isSuccess = true;

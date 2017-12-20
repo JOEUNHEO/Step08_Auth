@@ -11,7 +11,10 @@
 <body>
 <%
 	//1. 폼 전송되는 내용을 읽어와서
-	request.setCharacterEncoding("utf-8");
+	
+	// EncodingFilter 객체가 인코딩 설정을 하기 때문에 필요 없음
+	//request.setCharacterEncoding("utf-8");
+
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
 	String email = request.getParameter("email");

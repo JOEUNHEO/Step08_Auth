@@ -19,6 +19,9 @@
 <ul>
 	<li><a href="users/signup_form.jsp">회원가입</a></li>
 	<li><a href="users/login_form.jsp?url=${pageContext.request.contextPath }/">로그인</a></li>
+	<li><a href="users/private/info.jsp">로그인 하지 않으면 갈수 없는 곳</a></li>
+	<li><a href="member/play1.jsp">놀러가기1</a></li>
+	<li><a href="member/play2.jsp">놀러가기2</a></li>
 </ul>
 <%} %>
 </body>
