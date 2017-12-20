@@ -11,7 +11,8 @@
 <body>
 <%
 	//1. 폼 전송되는 아아디 비밀번호를 읽어와서
-	request.setCharacterEncoding("utf-8");
+	//request.setCharacterEncoding("utf-8");
+
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
 		

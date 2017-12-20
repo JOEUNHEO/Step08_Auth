@@ -29,8 +29,19 @@
 	
 	//3. 응답
 %>
-<%if(isSuccess){ %>
-<p><strong><%=id %></strong> 회원님 가입 되었습니다.</p>
+<%
+	if(isSuccess){ 
+		//가입과 동시에 로그인후 리다일렉트 이동할 url 주소를 읽어온다.
+		String url = request.getParameter("url");
+		if(url == null){//만일 없으면
+			//인덱스 페이지로 이동 될 수 있도록
+			url = request.getContextPath();
+		}
+%>
+<script>
+	alert("<%=id%> 님 가입을 축하드립니다^^");
+	location.href="login.jsp?url=<%=url %>&&id=<%=id%>&&pwd=<%=pwd%>";
+</script>
 <%}else{ %>
 <p><strong>이미 가입 되어 있거나, 가입이 실패 되었습니다.</strong></p>
 <%} %>
